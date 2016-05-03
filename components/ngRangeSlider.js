@@ -65,15 +65,16 @@
              * @type {String}
              */
             template: function template(element, attrs) {
-
+                
                 var displayTicks = Boolean(attrs.ticks === 'true');
                 var inputElements = '<input list="numbers" type="range" ng-change="_which = 0" ng-model="_model[0]" min="{{_values.min}}" max="{{_values.max}}" step="{{_step}}" /><input type="range" ng-change="_which = 1" ng-model="_model[1]" min="{{_values.min}}" max="{{_values.max}}" step="{{_step}}" />';
-
+                var style = '<style type="text/css">input[type=range]::-webkit-slider-runnable-track {background: linear-gradient(to right, {{_colors[0]}} +\' 0%, \'+ _colors[0] +\' \' + _model[0] + \'%, \'+ _colors[1] +\' \' + _model[0] + \'%, \'+ _colors[1] +\' \' + _model[1] + \'%, \'+ _colors[2] +\' \' + _model[1] + \'%)\';"}</style>';
+                
                 if (displayTicks) {
-                    return '<section>' + inputElements + '</section>';
+                    return '<section>'+ style + inputElements + '</section>';
                 }
 
-                return '<section><datalist id="numbers"><option ng-repeat="index in iter(max)">{{index}}</option></datalist>' + inputElements + '</section>';
+                return '<section><datalist id="numbers"><option ng-repeat="index in iter(max)">{{index}}</option></datalist>' + style + inputElements + '</section>';
 
             },
 
