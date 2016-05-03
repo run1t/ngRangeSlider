@@ -68,7 +68,7 @@
                 
                 var displayTicks = Boolean(attrs.ticks === 'true');
                 var inputElements = '<input list="numbers" type="range" ng-change="_which = 0" ng-model="_model[0]" min="{{_values.min}}" max="{{_values.max}}" step="{{_step}}" /><input type="range" ng-change="_which = 1" ng-model="_model[1]" min="{{_values.min}}" max="{{_values.max}}" step="{{_step}}" />';
-                var style = '<style type="text/css">input[type=range]::-webkit-slider-runnable-track {background: linear-gradient(to right, {{_colors[0]}} +\' 0%, \'+ _colors[0] +\' \' + _model[0] + \'%, \'+ _colors[1] +\' \' + _model[0] + \'%, \'+ _colors[1] +\' \' + _model[1] + \'%, \'+ _colors[2] +\' \' + _model[1] + \'%)\';"}</style>';
+                var style = '<style type="text/css">section.range-slider input[type=range]::-webkit-slider-runnable-track {background: linear-gradient(to right, {{_colors[0]}}  0%, {{_colors[0]}}  {{_model[0]}}%, {{_colors[1]}} {{_model[0]}}% , {{_colors[1]}} {{_model[1]}}% , {{_colors[2]}} {{_model[1]}}%);}</style>';
                 
                 if (displayTicks) {
                     return '<section>'+ style + inputElements + '</section>';
@@ -99,7 +99,8 @@
                 throttle: '=',
                 step: '=',
                 max: '=',
-                min: '='
+                min: '=',
+                colors: '='
             },
 
             /**
@@ -116,7 +117,8 @@
                  * @private
                  */
                 scope._model = [scope.model.from, scope.model.to];
-
+                scope._colors = scope.colors;
+                console.log(scope);
                 /**
                  * @property _values
                  * @type {Object}
